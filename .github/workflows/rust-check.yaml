@@ -19,20 +19,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions-rust-lang/setup-rust-toolchain@v1
       - run: cargo doc --no-deps
-      - uses: actions/upload-pages-artifact@v1
+      - run: tar -czf target/doc.tar.gz target/doc/*
+      - uses: actions/upload-artifact@v4
         with:
-          path: target/doc/
-  deploy:
-    name: deploy docs
-    needs: docs
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: upload-pages-artifact@v1
+          name: github-pages
+          path: target/doc.tar.gz
