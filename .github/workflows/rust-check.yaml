@@ -12,15 +12,15 @@ jobs:
       - uses: actions-rust-lang/setup-rust-toolchain@v1
       - run: cargo check
   docs:
-    name: cargo check
+    name: cargo docs
     needs: check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions-rust-lang/setup-rust-toolchain@v1
       - run: cargo doc --no-deps
-      - run: tar -czf target/doc.tar.gz target/doc/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-pages-artifact@v1
         with:
-          name: github-pages
-          path: target/doc.tar.gz
+          path: target/doc/
+      - id: deployment
+        uses: actions/deploy-pages@main
