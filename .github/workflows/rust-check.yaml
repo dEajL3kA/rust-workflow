@@ -25,5 +25,3 @@ jobs:
       - uses: actions/upload-pages-artifact@v1
         with:
           path: target/doc/
-      - id: deployment
-        uses: actions/deploy-pages@main
