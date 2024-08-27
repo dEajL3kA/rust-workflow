@@ -29,6 +29,21 @@ jobs:
         with:
           path: target/doc/
 
+  codecov:
+    name: llvm-cov
+    needs: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - run: cargo +stable install cargo-llvm-cov --locked
+      - run: cargo llvm-cov --release --codecov --output-path "target/llvm-cov/report.xml"
+      - uses: codecov/codecov-action@v4
+        with:
+          files: target/llvm-cov/report.xml
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+
   deploy:
     name: deploy pages
     needs: docs
