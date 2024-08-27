@@ -1,4 +1,4 @@
-fn main() {
+pub fn main() {
     println!("Hello, world!");
 }
 
@@ -7,5 +7,6 @@ mod tests {
     #[test]
     fn it_works() {
         assert!(true);
+        crate::main();
     }
 }
