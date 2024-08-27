@@ -31,7 +31,7 @@ jobs:
 
   codecov:
     name: llvm-cov
-    needs: 
+    needs: check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
